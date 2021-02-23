@@ -25,10 +25,10 @@ public class sendMSG extends Application{
 	        	//here we need to write the code 
 	        	// that creates a new scroll panel and shows total messages
 	        	if(MSG.getText().isEmpty()) {
-		        		View.showErrorMessage("you have to add a message");
+		        		menuView.showErrorMessage("you have to add a message");
 		        	}
 	        		else {
-	        			View.showSuccsessMessage("Message - ' "
+	        			menuView.showSuccsessMessage("Message - ' "
 	        					+  MSG.getText() + " ' HAS BEEN SENT");
 	        		}	
 	        }

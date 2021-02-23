@@ -15,17 +15,20 @@ import Model.Memento.Memento;
 import Model.Obsrver.Message;
 import Model.Obsrver.Observable;
 import Model.Singleton.Singleton;
+import View.menuView;
 
 public class Store implements Observable {
 	private Map<String, Product> productMap;
 	private boolean mementoposabilty = false;
 	private boolean isExit = false;
 	private ArrayList<Client> clients;
+	private menuView theView;
 	// private static fileReadWrite file;
 	private Singleton x;
 	private ArrayList<Client> clientsWhantsToGetMSG;
 
-	public Store(int Q) throws FileNotFoundException {
+	public Store(int Q,menuView theView) throws FileNotFoundException {
+		this.theView=theView;
 		x = Singleton.getInstance();
 		clients = new ArrayList<Client>();
 		clientsWhantsToGetMSG = new ArrayList<Client>();
@@ -79,6 +82,17 @@ public class Store implements Observable {
 		addObserver(pro.buyer);
 	}
 
+	public void showAllClients() {
+		StringBuffer str = new StringBuffer();
+		View.showAllClients sal = new View.showAllClients();
+		for (int i = 0; i < clients.size(); i++) {
+			if(!clients.get(i).equals(" ")) {
+				str.append(clients.get(i)+"\n\n");
+			}
+		}sal.setLabel(str.toString());
+		sal.start();
+	}
+	
 	public void addClinetsToClientsList(Client client) {
 		clients.add(client);
 	}
@@ -89,25 +103,37 @@ public class Store implements Observable {
 
 	@Override
 	public String toString() {
+		StringBuffer str =  new StringBuffer();
 		System.out.println("Store:");
 		int i = 1;
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
-			System.out.println(i);
+			str.append(i+"\n");
 			i++;
-			System.out.println(entry.getValue());
-			System.out.println();
+			str.append(entry.getValue()+"\n");
 		}
 
-		return " ";
+		return str.toString();
 	}
 
 	public Product getProduct(String barcode) {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			if (barcode.equals(entry.getKey())) {
-				System.out.println(entry.getValue());
+				theView.showSuccsessMessage(entry.getValue().toString());
 				return entry.getValue();
 			}
 		}
+		theView.showErrorMessage("there no such product");
+		return null;
+		}
+	public Product getProfitByBarcode(String barcode) {
+		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
+			if (barcode.equals(entry.getKey())) {
+				//System.out.println(entry.getValue());
+				theView.showSuccsessMessage("for barcode "+entry.getKey()+"\nthe profit is: " +entry.getValue().getProfit());
+				return entry.getValue();
+			}
+		}
+		theView.showErrorMessage("there no such product");
 		return null;
 	}
 
@@ -116,6 +142,7 @@ public class Store implements Observable {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			sum += entry.getValue().getProfit();
 		}
+		theView.showSuccsessMessage("the total profit is: " +sum);
 		return sum;
 	}
 

@@ -16,7 +16,9 @@ public class showChoosenProductCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			System.out.println(store.getProduct(barcode));
+		store.getProduct(barcode);
+				
+			
 		} catch (Exception e) {
 			System.out.println("showChoosenProductCommand");
 		}			

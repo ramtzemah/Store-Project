@@ -12,7 +12,7 @@ public class AllProductsProfitCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			System.out.println(store.getProfitFromAllPruducts());
+			store.getProfitFromAllPruducts();
 		} catch (Exception e) {
 			System.out.println("AllProductsProfitCommand");
 		}

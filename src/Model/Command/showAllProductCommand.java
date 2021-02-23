@@ -1,6 +1,8 @@
 package Model.Command;
 
 import Model.Store;
+import View.showAllProducts;
+import View.showTotalProfit;
 
 public class showAllProductCommand implements Command{
 	private Store store;
@@ -12,7 +14,8 @@ public class showAllProductCommand implements Command{
 	@Override
 	public void execute() {
 		try {
-			System.out.println(store);
+			//System.out.println(store);
+			showAllProducts stp = new showAllProducts(store);
 		} catch (Exception e) {
 			System.out.println("showAllProductCommand");
 		}

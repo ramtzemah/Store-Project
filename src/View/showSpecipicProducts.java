@@ -11,21 +11,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class showSpecipicProducts extends Application{
+public class showSpecipicProducts{
+public Button Show;
+private TextField Barcode;
+private Stage primaryStage;
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		TextField Barcode = new TextField();
+	public showSpecipicProducts(Stage primaryStage) {
+		this.primaryStage=primaryStage;
+	}
+
+	public void start() {
+	
+		Barcode = new TextField();
     	Label BarcodeLbl = new Label("Enter serial Number:");
     	BarcodeLbl.setLabelFor(Barcode);
         BarcodeLbl.setMnemonicParsing(true);
-        Button Show = new Button("show me!");
-        Show.setOnAction(new EventHandler<ActionEvent>() {
-	        @Override public void handle(ActionEvent e) {
-	        	// here we should put code that shows after search
-	        	//product details by barcode
-	        }
-        });
+        Show = new Button("show me!");
+
         GridPane ThirdRoot = new GridPane();
         ThirdRoot.add(BarcodeLbl, 0, 0);
         ThirdRoot.add(Barcode, 1, 0);
@@ -33,14 +35,24 @@ public class showSpecipicProducts extends Application{
         ThirdRoot.setAlignment(Pos.CENTER);
         
         Scene ThirdScene = new Scene(ThirdRoot, 350, 250);
-        Stage ThirdWindow = new Stage();
-        ThirdWindow.setTitle("Ram and Omer store system");
-        ThirdWindow.setScene(ThirdScene);
-
+        //Stage primaryStage = new Stage();
+        primaryStage.setTitle("Ram and Omer store system");
+        primaryStage.setScene(ThirdScene);
+        primaryStage.close();
         // Set position of second window, related to primary window.
-        ThirdWindow.setX(primaryStage.getX() + 200);
-        ThirdWindow.setY(primaryStage.getY() + 100);
-        ThirdWindow.show();
+        primaryStage.setX(primaryStage.getX() + 200);
+        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.show();
     }
-		
+
+	public void close() {
+		primaryStage.close();
+	}
+	public String getBarcode() {
+		return Barcode.getText();
+	}
+
+	
+	
+	
 }

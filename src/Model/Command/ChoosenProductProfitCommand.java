@@ -13,7 +13,7 @@ public class ChoosenProductProfitCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-		store.getProduct(barcode).getProfit();
+		store.getProfitByBarcode(barcode);
 		} catch (Exception e) {
 			System.out.println("ChoosenProductProfitCommand");
 		}		

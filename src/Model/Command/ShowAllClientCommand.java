@@ -18,10 +18,11 @@ public class ShowAllClientCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			clients = store.getClientList();
-			for (int i = 0; i < clients.size(); i++) {
-				System.out.println(clients.get(i));
-			}
+			store.showAllClients();
+//			clients = store.getClientList();
+//			for (int i = 0; i < clients.size(); i++) {
+//				System.out.println(clients.get(i));
+//			}
 		} catch (Exception e) {
 			System.out.println("ShowAllClientCommand");
 		}

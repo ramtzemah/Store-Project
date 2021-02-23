@@ -22,7 +22,12 @@ public class Client implements Sender, Receiver {
 
 	@Override
 	public String toString() {
-		return "Client Name " + ClientName + "\nphoneNumber " + phoneNumber + "\nwantsUpdate " + wantsUpdate;
+		StringBuffer str = new StringBuffer();
+		str.append("Client Name " + ClientName + "\nphoneNumber " + phoneNumber + "\nwantsUpdate: ");
+		if(wantsUpdate) {
+			str.append("yes");
+		}else str.append("no");
+		return str.toString();
 	}
 
 	@Override

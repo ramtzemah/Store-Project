@@ -44,17 +44,19 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		System.out.println( "barcode " + barcode + "\nProductName " + ProductName + "\nCostPrice " + CostPrice
-				+ "\nSellingPrice " + SellingPrice);
-		if(buyer!=null) {
-			System.out.println(buyer);
-		}
-		return " ";
+		StringBuffer str =new StringBuffer();
+		str.append( "barcode " + barcode + "\nProductName " + ProductName + "\nCostPrice " + CostPrice
+				+ "\nSellingPrice " + SellingPrice+"\n"+buyer);
+//		if(buyer!=null) {
+//			System.out.println(buyer);
+//		}
+		return str.toString();
 	}
 
 	public int getProfit() {
 		return (SellingPrice-CostPrice);
 	}
+	
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}

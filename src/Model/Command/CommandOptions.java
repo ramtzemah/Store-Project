@@ -1,38 +1,54 @@
 package Model.Command;
 
+import Model.Store;
+
 public class CommandOptions {
 
 	private Command addProductToStoreCommand;
 	private Command AllProductsProfitCommand;
-	private Command ChoosenProductProfitCommand;
+	private ChoosenProductProfitCommand ccp;
 	private Command MementoCommand;
 	private Command RemoveAllProductCommand;
 	private Command RemoveChoosenProductCommand;
 	private Command SendMessageCommand;
-	private Command ShowAllClientCommand;
+	private ShowAllClientCommand sak;
 	private Command showAllProductCommand;
-	private Command showChoosenProductCommand;
-
+	private showChoosenProductCommand scp;
+	private Store store;
 	public CommandOptions(Command addProductToStoreCommand,
 	Command AllProductsProfitCommand,
-	Command ChoosenProductProfitCommand,
+	ChoosenProductProfitCommand ccp,
 	Command MementoCommand,
 	Command RemoveAllProductCommand,
 	Command RemoveChoosenProductCommand,
 	Command SendMessageCommand,
-	Command ShowAllClientCommand,
+	ShowAllClientCommand sak,
 	Command showAllProductCommand,
-	Command showChoosenProductCommand) {
+	showChoosenProductCommand scp,
+//	Command showChoosenProductCommand,
+	Store store) {
 		this.addProductToStoreCommand=addProductToStoreCommand;
 		this.AllProductsProfitCommand =AllProductsProfitCommand;
-		this.ChoosenProductProfitCommand=ChoosenProductProfitCommand;
+		this.ccp=ccp;
 		this.MementoCommand= MementoCommand;
 		this.RemoveAllProductCommand = RemoveAllProductCommand;
 		this.RemoveChoosenProductCommand=RemoveChoosenProductCommand;
 		this.SendMessageCommand=SendMessageCommand;
-		this.ShowAllClientCommand=ShowAllClientCommand;
+		this.sak=sak;
 		this.showAllProductCommand=showAllProductCommand;
-		this.showChoosenProductCommand=showChoosenProductCommand;
+		this.scp=scp;
+		this.store=store;
+		//aptt = new showChoosenProductCommand(store);
+//		AllProductsProfitCommand;
+//		ChoosenProductProfitCommand;
+//		MementoCommand;
+//		RemoveAllProductCommand;
+//		RemoveChoosenProductCommand;
+//		SendMessageCommand;
+//		ShowAllClientCommand;
+//		showAllProductCommand;
+		//ccp = new ChoosenProductProfitCommand(store);
+		 //scp = new showChoosenProductCommand(store);
 	}
 
 	public void AddProductToStoreCommand() {
@@ -44,7 +60,7 @@ public class CommandOptions {
 	}
 
 	public void ChoosenProductProfitCommand() {
-		ChoosenProductProfitCommand.execute();
+		ccp.execute();
 	}
 
 	public void MementoCommand() {
@@ -64,7 +80,7 @@ public class CommandOptions {
 	}
 
 	public void ShowAllClientCommand() {
-		ShowAllClientCommand.execute();
+		sak.execute();
 	}
 
 	public void ShowAllProductCommand() {
@@ -72,8 +88,54 @@ public class CommandOptions {
 	}
 
 	public void ShowChoosenProductCommand() {
-		showChoosenProductCommand.execute();
+		scp.execute();
 	}
+
+	public Command getAddProductToStoreCommand() {
+		return addProductToStoreCommand;
+	}
+
+	public Command getAllProductsProfitCommand() {
+		return AllProductsProfitCommand;
+	}
+
+	public ChoosenProductProfitCommand getChoosenProductProfitCommand() {
+		return ccp;
+	}
+
+	public Command getMementoCommand() {
+		return MementoCommand;
+	}
+
+	public Command getRemoveAllProductCommand() {
+		return RemoveAllProductCommand;
+	}
+
+	public Command getRemoveChoosenProductCommand() {
+		return RemoveChoosenProductCommand;
+	}
+
+	public Command getSendMessageCommand() {
+		return SendMessageCommand;
+	}
+
+	public ShowAllClientCommand getsak() {
+		return sak;
+	}
+
+	public Command getShowAllProductCommand() {
+		return showAllProductCommand;
+	}
+
+	public showChoosenProductCommand getScp() {
+		return scp;
+	}
+
+
+
+	
+	
+	
 	
 	
 }
