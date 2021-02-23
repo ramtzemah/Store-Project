@@ -11,18 +11,20 @@ public class Product {
 	int SellingPrice; //the price in the store
 	Client buyer; // contains name , phone number , and a boolean - wants Updates
 	
-	public Product(String barcode,String ProductName,int CostPrice,int SellingPrice , Client buyer){
+	public Product(String barcode,String ProductName,int CostPrice,int SellingPrice , String clientName,String clientPhoneNumber, boolean wantsUpdate){
 		this.barcode = barcode;
 		this.ProductName = ProductName;
 		this.CostPrice = CostPrice;
 		this.SellingPrice = SellingPrice;
-		this.buyer = buyer;
+		this.buyer = new Client(clientName, clientPhoneNumber, wantsUpdate);
 	}
 	public Product(String ProductName,String barcode,int CostPrice,int SellingPrice){
 		this.barcode = barcode;
 		this.ProductName = ProductName;
 		this.CostPrice = CostPrice;
 		this.SellingPrice = SellingPrice;
+		this.buyer = new Client(" ", " ", false);
+
 	}
 	
 	public String getBarcode() {
@@ -45,7 +47,7 @@ public class Product {
 		System.out.println( "barcode " + barcode + "\nProductName " + ProductName + "\nCostPrice " + CostPrice
 				+ "\nSellingPrice " + SellingPrice);
 		if(buyer!=null) {
-			System.out.println("buyer=" + buyer);
+			System.out.println(buyer);
 		}
 		return " ";
 	}

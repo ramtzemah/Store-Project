@@ -4,31 +4,73 @@
 
 package Model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.AllPermission;
+
+import Model.Command.AllProductsProfitCommand;
+import Model.Command.ChoosenProductProfitCommand;
+import Model.Command.Command;
+import Model.Command.MementoCommand;
+import Model.Command.RemoveChoosenProductCommand;
+import Model.Command.SendMessageCommand;
+import Model.Command.ShowAllClientCommand;
+import Model.Command.addProductToStoreCommand;
+import Model.Command.showAllProductCommand;
+import Model.Command.showChoosenProductCommand;
 import Model.Memento.Memento;
 import Model.Obsrver.Message;
 import Model.Singleton.Singleton;
 
 public class main {
 	
-	public static void main(String[] args) {
-		Store store = new Store(3);
-		Product pro1 = new Product("milk", "def",3,5);
-		Product pro2 = new Product("apple", "abc",7,9);
-		Product pro3 = new Product("orange", "ghi",1,6);
+	public static void main(String[] args) throws IOException {
+		Store store = new Store(1);
+		Command addProductToStoreCommand = new addProductToStoreCommand(store);
+		Command AllProductsProfitCommand = new AllProductsProfitCommand(store);
+		Command ChoosenProductProfitCommand= new ChoosenProductProfitCommand(store);
+		Command MementoCommand = new MementoCommand(store);
+		Command RemoveAllProductCommand = new Model.Command.RemoveAllProductCommand(store);
+		Command RemoveChoosenProductCommand = new RemoveChoosenProductCommand(store);
+		Command SendMessageCommand = new SendMessageCommand(store);
+		Command ShowAllClientCommand = new ShowAllClientCommand(store);
+		Command showAllProductCommand=new showAllProductCommand(store);
+		Command showChoosenProductCommand = new showChoosenProductCommand(store);
+		Product pro1 = new Product("def","milk" ,3,5,"ram", "0501111111", true);
+		Product pro2 = new Product( "abc","apple",7,9,"omer", "05022222222", false);
+		Product pro3 = new Product( "ghi","orange",1,6,"mohamad", "0503333333", true);
 		
-		store.addToStore(pro1);
-		store.addToStore(pro2);
+		Memento mem = store.createMemento();
 		store.addToStore(pro3);
-		System.out.println(store.toString());
 		store.addToStore(pro2);
-		store.addToStore(pro2);
-		store.addToStore(pro2);
-		pro2.setCostPrice(6);
-		store.addToStore(pro2);
-		System.out.println(store.toString());
+		store.addToStore(pro1);
 
+		//store.addToStore(pro3);
+//		Client c1 = new Client("ram", "0501111111", true);
+//		Client c2 = new Client("omer", "05022222222", false);
+//		Client c3 = new Client("mohamad", "0503333333", true);
+		System.out.println(store.toString());
+	//	store.addToStore(pro2);
+	//	System.out.println(store.toString());
+//		store.setMemento(mem);
+	//	System.out.println(store.toString());
+		System.out.println(store.getProduct("abc"));
+//		System.out.println(store.getProduct("abc"));
+//		System.out.println(store.getProfitFromAllPruducts());
+//		store.notifyObservers("3 b-30 ,5b-50");
+//		
 		
 		
+		//		store.addToStore(pro2);
+//		store.addToStore(pro2);
+//		store.addToStore(pro2);
+//		pro2.setCostPrice(6);
+//		store.addToStore(pro2);
+//		System.out.println(store.toString());
+//		System.out.println(store);
+//		store.setMemento(mem);
+//		System.out.println(store);
+
 		
 //		Memento mem = store.createMemento();
 //		store.addToStore(pro3);

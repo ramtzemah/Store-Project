@@ -48,6 +48,18 @@ public class Client implements Sender, Receiver {
 		System.out.println("my phone number is "+ phoneNumber);
 		System.out.println("i get the message :)\n\n");
 	}
+
+	public String getClientName() {
+		return ClientName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public boolean isWantsUpdate() {
+		return wantsUpdate;
+	}
 	
 	
 	
