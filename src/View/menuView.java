@@ -22,9 +22,12 @@ public class menuView{
 	public Button sendMSG;
 	public Button showAllClient;
 	private Stage PrimaryStage;
-	
+	private showAllProducts sap;
+	private showAllClients sac;
 	public menuView(Stage primaryStage) {
 		this.PrimaryStage = primaryStage;	
+		sap = new showAllProducts();
+		sac = new showAllClients();
 	}
 	
 	public void start() throws Exception {
@@ -162,4 +165,13 @@ public class menuView{
 		alert.setContentText(succsessMessage);
 		alert.show();
 	}
+
+	public showAllProducts getSap() {
+		return sap;
+	}
+
+	public showAllClients getSac() {
+		return sac;
+	}
+	
 }

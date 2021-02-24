@@ -84,13 +84,13 @@ public class Store implements Observable {
 
 	public void showAllClients() {
 		StringBuffer str = new StringBuffer();
-		View.showAllClients sal = new View.showAllClients();
+	//	View.showAllClients sal = new View.showAllClients();
 		for (int i = 0; i < clients.size(); i++) {
 			if(!clients.get(i).equals(" ")) {
 				str.append(clients.get(i)+"\n\n");
 			}
-		}sal.setLabel(str.toString());
-		sal.start();
+		}theView.getSac().setLabel(str.toString());
+		theView.getSac().start();
 	}
 	
 	public void addClinetsToClientsList(Client client) {
@@ -111,7 +111,8 @@ public class Store implements Observable {
 			i++;
 			str.append(entry.getValue()+"\n");
 		}
-
+		theView.getSap().setLabel(str.toString());
+		theView.getSap().start();
 		return str.toString();
 	}
 

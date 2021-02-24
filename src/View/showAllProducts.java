@@ -9,10 +9,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class showAllProducts{
-private Store store;
-	public showAllProducts(Store store) {
-		this.store=store;
-		start();
+private Label label;
+//private Store store;
+//	public showAllProducts(Store store) {
+//		this.store=store;
+//		start();
+//	}
+
+	public showAllProducts() {
 	}
 
 	public void start() {
@@ -26,7 +30,6 @@ private Store store;
     	ScrollPane ThirdRoot = new ScrollPane();
     	ThirdRoot.setPannable(true);
     	//ThirdRoot.setContent(headAllProd);
-    	Label label =  new Label(store.toString());
     	//ThirdRoot.setContent(label);
     	VBox bv = new VBox();
     	bv.getChildren().addAll(headAllProd,label);
@@ -44,4 +47,9 @@ private Store store;
 		
 	}
 
+	public void setLabel(String str) {		
+		label = new Label(str);
+	}
+
+	
 }

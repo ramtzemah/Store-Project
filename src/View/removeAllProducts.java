@@ -5,6 +5,9 @@ import javafx.stage.Stage;
 
 public class removeAllProducts extends Application{
 
+	public removeAllProducts(Stage primaryStage) {
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//if(TOTAL remove suceed)
