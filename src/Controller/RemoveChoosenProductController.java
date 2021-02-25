@@ -1,6 +1,10 @@
 package Controller;
 
 import Model.Command.CommandOptions;
+import View.menuView;
+import View.removeByMakat;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class RemoveChoosenProductController {
@@ -13,8 +17,25 @@ public class RemoveChoosenProductController {
 		}
 
 		public void startView() {
-			// TODO Auto-generated method stub
-			
+			removeByMakat rpbm = new removeByMakat();
+			rpbm.start();
+			rpbm.getShow().setOnAction(new EventHandler<ActionEvent>() {
+		    	
+		        @Override public void handle(ActionEvent e) {
+
+		    		if(rpbm.getBarcode().getText().isEmpty()) {
+		    		menuView.showErrorMessage("you have to add a barcode");
+		    		}
+				else {
+					String barcode = rpbm.getBarcode().getText();
+					commOp.getRemoveChoosenProductCommand().setBarcode(barcode);
+					commOp.getRemoveChoosenProductCommand().execute();
+					rpbm.close();
+				}
+				
+		        		
+		        }
+	        });
 		}
 	
 }

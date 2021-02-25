@@ -14,8 +14,7 @@ public class RemoveAllProductController {
 		}
 
 		public void startView() {
-			// TODO Auto-generated method stub
-			
+			commOp.getRemoveAllProductCommand().execute();
 		}
 
 }

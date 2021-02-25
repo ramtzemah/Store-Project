@@ -192,11 +192,34 @@ public class Store implements Observable {
 	}
 
 	public void removeProduct(String barcode) {
+		String clientName = "";
+		int check =0;
+		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
+			if(barcode.equals(entry.getValue().getBarcode())) {
+				clientName=entry.getValue().getBuyer().ClientName;
+				check++;
+			}
+		}
 		productMap.remove(barcode);
+		for (int i = 0; i < clients.size(); i++) {
+			if(clients.get(i).getClientName().equals(clientName)) {
+				clients.remove(i);
+			}
+		}
+		for (int i = 0; i < clientsWhantsToGetMSG.size(); i++) {
+			if(clientsWhantsToGetMSG.get(i).getClientName().equals(clientName)) {
+				clientsWhantsToGetMSG.remove(i);
+			}
+		}
 		mementoposabilty = false;
+		if(check==1) {
+			theView.showSuccsessMessage("the product remove");
+		}else theView.showErrorMessage("there is not such product");
 	}
 
 	public void removeAllProduct() {
+		clients.clear();
+		clientsWhantsToGetMSG.clear();
 		productMap.clear();
 		mementoposabilty = false;
 	}
@@ -236,21 +259,12 @@ public class Store implements Observable {
 				});
 				
 				Thread.sleep(2000);
-				
-
-				
-
 				}
-			
 			}catch (InterruptedException e) {
 				System.out.println("store");
 			} 
 		});
 		thread.start();
-		
-	
 	}
-
 	
-
 }

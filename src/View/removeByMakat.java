@@ -11,25 +11,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class removeByMakat extends Application{
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		TextField Barcode = new TextField();
+public class removeByMakat{
+	private TextField Barcode;
+	private Button Show;
+	private Stage primaryStage;
+	
+	public void start(){
+		primaryStage = new Stage();
+		Barcode = new TextField();
     	Label BarcodeLbl = new Label("Enter serial Number:");
     	BarcodeLbl.setLabelFor(Barcode);
         BarcodeLbl.setMnemonicParsing(true);
-        Button Show = new Button("DELETE");
-        Show.setOnAction(new EventHandler<ActionEvent>() {
-	        @Override public void handle(ActionEvent e) {
-	        	// here we should put code that SEARCH FINDS & DELETE PRODUCT
-	        	//BY PRODUCT ID
-	        	//if(remove suceed)
-	        	//showSuccsessMessage("Product has been removed");
-	        	//if(remove failed)
-	        	//showErrorMessage("remove has been failed , try another barcode");
-	        }
-        });
+        Show = new Button("DELETE");
+ 
         GridPane ThirdRoot = new GridPane();
         ThirdRoot.add(BarcodeLbl, 0, 0);
         ThirdRoot.add(Barcode, 1, 0);
@@ -37,15 +31,26 @@ public class removeByMakat extends Application{
         ThirdRoot.setAlignment(Pos.CENTER);
         
         Scene ThirdScene = new Scene(ThirdRoot, 350, 250);
-        Stage ThirdWindow = new Stage();
-        ThirdWindow.setTitle("Ram and Omer store system");
-        ThirdWindow.setScene(ThirdScene);
+        primaryStage.setTitle("Ram and Omer store system");
+        primaryStage.setScene(ThirdScene);
 
         // Set position of second window, related to primary window.
-        ThirdWindow.setX(primaryStage.getX() + 200);
-        ThirdWindow.setY(primaryStage.getY() + 100);
-        ThirdWindow.show();
+        primaryStage.setX(primaryStage.getX() + 200);
+        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.show();
     	
+	}
+
+	public TextField getBarcode() {
+		return Barcode;
+	}
+
+	public Button getShow() {
+		return Show;
+	}
+
+	public void close() {
+		primaryStage.close();
 	}
 
 }

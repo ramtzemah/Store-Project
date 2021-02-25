@@ -9,7 +9,7 @@ public class CommandOptions {
 	private ChoosenProductProfitCommand ccp;
 	private Command MementoCommand;
 	private Command RemoveAllProductCommand;
-	private Command RemoveChoosenProductCommand;
+	private RemoveChoosenProductCommand rcp;
 	private SendMessageCommand sMSG;
 	private ShowAllClientCommand sak;
 	private Command showAllProductCommand;
@@ -20,7 +20,7 @@ public class CommandOptions {
 	ChoosenProductProfitCommand ccp,
 	Command MementoCommand,
 	Command RemoveAllProductCommand,
-	Command RemoveChoosenProductCommand,
+	RemoveChoosenProductCommand rcp,
 	SendMessageCommand sMSG,
 	ShowAllClientCommand sak,
 	Command showAllProductCommand,
@@ -32,7 +32,7 @@ public class CommandOptions {
 		this.ccp=ccp;
 		this.MementoCommand= MementoCommand;
 		this.RemoveAllProductCommand = RemoveAllProductCommand;
-		this.RemoveChoosenProductCommand=RemoveChoosenProductCommand;
+		this.rcp=rcp;
 		this.sMSG=sMSG;
 		this.sak=sak;
 		this.showAllProductCommand=showAllProductCommand;
@@ -72,7 +72,7 @@ public class CommandOptions {
 	}
 
 	public void RemoveChoosenProductCommand() {
-		RemoveChoosenProductCommand.execute();
+		rcp.execute();
 	}
 
 	public  void SendMessageCommand() {
@@ -111,8 +111,8 @@ public class CommandOptions {
 		return RemoveAllProductCommand;
 	}
 
-	public Command getRemoveChoosenProductCommand() {
-		return RemoveChoosenProductCommand;
+	public RemoveChoosenProductCommand getRemoveChoosenProductCommand() {
+		return rcp;
 	}
 
 	public SendMessageCommand getSendMessageCommand() {
