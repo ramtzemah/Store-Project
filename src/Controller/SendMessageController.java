@@ -1,6 +1,10 @@
 package Controller;
 
 import Model.Command.CommandOptions;
+import View.menuView;
+import View.sendMSG;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class SendMessageController {
@@ -13,8 +17,27 @@ public class SendMessageController {
 			this.commOp=commOp;
 		}
 
+
 		public void startView() {
-			// TODO Auto-generated method stub
+			sendMSG sMSG =  new sendMSG();
+			sMSG.start();
+		    sMSG.Show.setOnAction(new EventHandler<ActionEvent>() {
+		    	
+		        @Override public void handle(ActionEvent e) {
+
+		    		if(sMSG.MSG.getText().isEmpty()) {
+		    		menuView.showErrorMessage("you have to add a message");
+		    		}
+				else {
+					String msg = sMSG.MSG.getText();
+					commOp.getSendMessageCommand().setMsg(msg);;
+					commOp.getSendMessageCommand().execute();
+					sMSG.close();
+				}
+				
+		        		
+		        }
+	        });
 			
 		}
 }

@@ -14,7 +14,6 @@ public class MementoController {
 		}
 
 		public void startView() {
-			// TODO Auto-generated method stub
-			
+			commOp.getMementoCommand().execute();
 		}
 }

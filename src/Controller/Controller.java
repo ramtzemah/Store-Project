@@ -1,5 +1,7 @@
 package Controller;
 
+import com.sun.javafx.webkit.ThemeClientImpl;
+
 import Model.Product;
 import Model.Store;
 import Model.Command.AllProductsProfitCommand;
@@ -39,12 +41,12 @@ public class Controller {
 			Command MementoCommand = new MementoCommand(store);
 			Command RemoveAllProductCommand = new RemoveAllProductCommand(store);
 			Command RemoveChoosenProductCommand = new RemoveChoosenProductCommand(store);
-			Command SendMessageCommand = new SendMessageCommand(store);
+			SendMessageCommand sMSG = new SendMessageCommand(store);
 			ShowAllClientCommand sak = new ShowAllClientCommand(store);
 			Command showAllProductCommand=new showAllProductCommand(store);
 			showChoosenProductCommand showChoosenProductCommand = new showChoosenProductCommand(store);
 
-			CommandOptions CommOp = new CommandOptions(addProductToStoreCommand, AllProductsProfitCommand, ccp, MementoCommand, RemoveAllProductCommand, RemoveChoosenProductCommand, SendMessageCommand, sak, showAllProductCommand, showChoosenProductCommand,store);
+			CommandOptions CommOp = new CommandOptions(addProductToStoreCommand, AllProductsProfitCommand, ccp, MementoCommand, RemoveAllProductCommand, RemoveChoosenProductCommand, sMSG, sak, showAllProductCommand, showChoosenProductCommand,store);
 			addProductController apc = new addProductController(primaryStage,CommOp);
 			AllProductsProfitController app = new AllProductsProfitController(primaryStage,CommOp);
 			ChoosenProductProfitController cpp = new ChoosenProductProfitController(primaryStage,CommOp);

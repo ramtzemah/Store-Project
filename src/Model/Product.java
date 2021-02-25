@@ -4,13 +4,15 @@
 
 package Model;
 
+import View.menuView;
+
 public class Product {
-	String barcode;
-	String ProductName;
-	int CostPrice; //the price that the store paid to the supplier
-	int SellingPrice; //the price in the store
-	Client buyer; // contains name , phone number , and a boolean - wants Updates
-	
+	private String barcode;
+	private String ProductName;
+	private int CostPrice; //the price that the store paid to the supplier
+	private int SellingPrice; //the price in the store
+	private Client buyer; // contains name , phone number , and a boolean - wants Updates
+
 	public Product(String barcode,String ProductName,int CostPrice,int SellingPrice , String clientName,String clientPhoneNumber, boolean wantsUpdate){
 		this.barcode = barcode;
 		this.ProductName = ProductName;
@@ -45,11 +47,8 @@ public class Product {
 	@Override
 	public String toString() {
 		StringBuffer str =new StringBuffer();
-		str.append( "barcode " + barcode + "\nProductName " + ProductName + "\nCostPrice " + CostPrice
-				+ "\nSellingPrice " + SellingPrice+"\n"+buyer);
-//		if(buyer!=null) {
-//			System.out.println(buyer);
-//		}
+		str.append( "barcode:\t " + barcode + "\nProductName:\t " + ProductName + "\nCostPrice:\t " + CostPrice
+				+ "\nSellingPrice:\t " + SellingPrice+"\n");
 		return str.toString();
 	}
 
@@ -57,21 +56,7 @@ public class Product {
 		return (SellingPrice-CostPrice);
 	}
 	
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
-	}
-	public void setProductName(String productName) {
-		ProductName = productName;
-	}
-	public void setCostPrice(int costPrice) {
-		CostPrice = costPrice;
-	}
-	public void setSellingPrice(int sellingPrice) {
-		SellingPrice = sellingPrice;
-	}
-	public void setBuyer(Client buyer) {
-		this.buyer = buyer;
-	}
+	
 	
 	
 }

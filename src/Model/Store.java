@@ -16,6 +16,7 @@ import Model.Obsrver.Message;
 import Model.Obsrver.Observable;
 import Model.Singleton.Singleton;
 import View.menuView;
+import javafx.application.Platform;
 
 public class Store implements Observable {
 	private Map<String, Product> productMap;
@@ -26,6 +27,7 @@ public class Store implements Observable {
 	// private static fileReadWrite file;
 	private Singleton x;
 	private ArrayList<Client> clientsWhantsToGetMSG;
+	private  static Memento m;
 
 	public Store(int Q,menuView theView) throws FileNotFoundException {
 		this.theView=theView;
@@ -78,8 +80,8 @@ public class Store implements Observable {
 		mementoposabilty = true;
 		// file.writeProductToFile(pro);
 		isExit = false;
-		addClinetsToClientsList(pro.buyer);
-		addObserver(pro.buyer);
+		addClinetsToClientsList(pro.getBuyer());
+		addObserver(pro.getBuyer());
 	}
 
 	public void showAllClients() {
@@ -101,18 +103,29 @@ public class Store implements Observable {
 		return clients;
 	}
 
-	@Override
-	public String toString() {
+
+	public void ShowAllProducts() {
 		StringBuffer str =  new StringBuffer();
-		System.out.println("Store:");
 		int i = 1;
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
-			str.append(i+"\n");
+			str.append(i+")\n");
 			i++;
-			str.append(entry.getValue()+"\n");
+			str.append(entry.getValue()+"\n\n");
 		}
 		theView.getSap().setLabel(str.toString());
 		theView.getSap().start();
+	}
+	
+	
+	@Override
+	public String toString() {
+		StringBuffer str =  new StringBuffer();
+		int i = 1;
+		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
+			str.append(i+")\n");
+			i++;
+			str.append(entry.getValue()+"\n\n");
+		}
 		return str.toString();
 	}
 
@@ -148,17 +161,18 @@ public class Store implements Observable {
 	}
 
 	public Memento createMemento() {
+		m = new Memento(productMap, clients, clientsWhantsToGetMSG);
 		return new Memento(productMap, clients, clientsWhantsToGetMSG);
 	}
 
-	public void setMemento(Memento m) {
+	public void setMemento() {
 		if (mementoposabilty) {
 			TreeMap<String, Product> temp = m.getMap();
 			productMap.clear();
+			
 			for (Map.Entry<String, Product> entry : temp.entrySet()) {
 				productMap.put(entry.getKey(), entry.getValue());
 			}
-
 			clients.clear();
 			ArrayList<Client> tempClinets = m.getClientsMemento();
 			for (int i = 0; i < tempClinets.size(); i++) {
@@ -170,10 +184,10 @@ public class Store implements Observable {
 			for (int i = 0; i < tempClinetsMSG.size(); i++) {
 				clientsWhantsToGetMSG.add(tempClinetsMSG.get(i));
 			}
-
 			mementoposabilty = false;
+			theView.showSuccsessMessage("success undo");
 		} else {
-			System.out.println("sorry but you cant undo right now");
+			theView.showErrorMessage("you cant undo now");
 		}
 	}
 
@@ -204,10 +218,39 @@ public class Store implements Observable {
 	}
 
 	@Override
-	public void notifyObservers(String msg) {
-		for (int i = 0; i < clientsWhantsToGetMSG.size(); i++) {
-			x.receiveMSG(clientsWhantsToGetMSG.get(i), x.s, new Message(msg));
-		}
+	public synchronized void notifyObservers(String msg) {
+		StringBuffer str = new StringBuffer(""); 
+		theView.getSms().setLabel(str.toString());
+		theView.getSms().start();
+
+		Thread thread = new Thread(()->{
+		try {
+			
+			for (Client C : clientsWhantsToGetMSG) {
+				
+				Platform.runLater(() ->{
+				str.append(x.receiveMSG(C, x.s, new Message(msg)));
+				str.append("\n");
+				theView.getSms().setLabel(str.toString());
+				theView.getSms().start();
+				});
+				
+				Thread.sleep(2000);
+				
+
+				
+
+				}
+			
+			}catch (InterruptedException e) {
+				System.out.println("store");
+			} 
+		});
+		thread.start();
+		
+	
 	}
+
+	
 
 }

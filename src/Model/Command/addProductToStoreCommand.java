@@ -21,8 +21,8 @@ public class addProductToStoreCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			Product pro = new Product(ProductName, barcode, CostPrice, SellingPrice,buyer.getClientName(),buyer.getPhoneNumber(),buyer.isWantsUpdate());
-			store.addToStore(pro);
+			//Product pro = new Product(ProductName, barcode, CostPrice, SellingPrice,buyer.getClientName(),buyer.getPhoneNumber(),buyer.isWantsUpdate());
+		//	store.addToStore(pro);
 		} catch (Exception e) {
 			System.out.println("addProductToStoreCommand");
 		}		

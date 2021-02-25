@@ -1,9 +1,12 @@
 package Model;
 
+import com.sun.javafx.webkit.ThemeClientImpl;
+
 import Model.Obsrver.Message;
 import Model.Obsrver.Receiver;
 import Model.Obsrver.Sender;
 import Model.Singleton.SuperPhone;
+import View.menuView;
 
 //writen by omer
 //16.2.2021
@@ -13,6 +16,7 @@ public class Client implements Sender, Receiver {
 	String ClientName;
 	String phoneNumber;
 	boolean wantsUpdate;
+	
 	
 	public Client(String ClientName, String phoneNumber, boolean wantsUpdate) {
 		this.ClientName = ClientName;
@@ -31,15 +35,15 @@ public class Client implements Sender, Receiver {
 	}
 
 	@Override
-	public void receiveMSG(Client c,SuperPhone s, Message msg) {
-		System.out.println("-------------"+c.phoneNumber()+"-------------");
-		System.out.println("New Message Has Arrived\n" + 
-				"------------------------------------\n" + 
-				"From: "+s.getSuperPhone()+"\n" + 
-				"Date: "+msg.getTime()+"\n" + 
-				"Message: "+msg.getMsg()+"\n" + 
-				"------------------------------------\n");	
-		sendMSG();
+	public synchronized String receiveMSG(Client c,SuperPhone s, Message msg) {
+//		System.out.println("-------------"+c.phoneNumber()+"-------------");
+//		System.out.println("New Message Has Arrived\n" + 
+//				"------------------------------------\n" + 
+//				"From: "+s.getSuperPhone()+"\n" + 
+//				"Date: "+msg.getTime()+"\n" + 
+//				"Message: "+msg.getMsg()+"\n" + 
+//				"------------------------------------\n");	
+		 return sendMSG();
 	}
 
 	@Override
@@ -48,10 +52,13 @@ public class Client implements Sender, Receiver {
 	}
 
 	@Override
-	public void sendMSG() {
-		System.out.println("my name is "+ ClientName);
-		System.out.println("my phone number is "+ phoneNumber);
-		System.out.println("i get the message :)\n\n");
+	public synchronized String sendMSG() {
+		StringBuffer str =  new StringBuffer();
+		str.append("\nmy name is "+ ClientName);
+		str.append("\nmy phone number is "+ phoneNumber);
+		str.append("\ni get the message :)\n\n");
+		
+		return str.toString();
 	}
 
 	public String getClientName() {

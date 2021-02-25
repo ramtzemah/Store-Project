@@ -14,9 +14,9 @@ public class MementoCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			store.setMemento(mem);
+			store.setMemento();
 		} catch (Exception e) {
-			System.out.println("ShowAllClientCommand");
+			System.out.println("MementoCommand");
 		}
 	}
 

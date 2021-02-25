@@ -1,5 +1,7 @@
 package View;
 
+import java.util.concurrent.Semaphore;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,10 +26,14 @@ public class menuView{
 	private Stage PrimaryStage;
 	private showAllProducts sap;
 	private showAllClients sac;
+	private sendMSGShow sms;
+
+
 	public menuView(Stage primaryStage) {
 		this.PrimaryStage = primaryStage;	
 		sap = new showAllProducts();
 		sac = new showAllClients();
+		sms = new sendMSGShow(primaryStage);
 	}
 	
 	public void start() throws Exception {
@@ -172,6 +178,10 @@ public class menuView{
 
 	public showAllClients getSac() {
 		return sac;
+	}
+	
+	public sendMSGShow getSms() {
+		return sms;
 	}
 	
 }

@@ -6,11 +6,10 @@ import Model.Obsrver.Message;
 import Model.Obsrver.Receiver;
 import Model.Obsrver.Sender;
 
-public class Singleton implements Receiver
+public class Singleton implements Sender
 { 
     private static Singleton single_instance = null; 
   
-   // public Sender st;
     public SuperPhone s; 
   
     private Singleton() 
@@ -32,8 +31,9 @@ public class Singleton implements Receiver
 	}
 
 	@Override
-	public void receiveMSG(Client c,SuperPhone s, Message msg) {
-		c.receiveMSG(c,s, msg);
+	public synchronized String receiveMSG(Client c,SuperPhone s, Message msg) {
+		String str = c.receiveMSG(c,s, msg);
+		return str;
 	}
 
 

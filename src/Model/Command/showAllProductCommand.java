@@ -16,7 +16,7 @@ public class showAllProductCommand implements Command{
 		try {
 			//System.out.println(store);
 			//showAllProducts stp = new showAllProducts(store);
-			store.toString();
+			store.ShowAllProducts();
 		} catch (Exception e) {
 			System.out.println("showAllProductCommand");
 		}
