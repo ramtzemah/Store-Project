@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.BufferCapabilities.FlipContents;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,10 +9,12 @@ import java.util.ArrayList;
 //17/2
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
-//import Model.FileWork.fileReadWrite;
+import Model.FileWork.FileIterator;
 import Model.Memento.Memento;
 import Model.Obsrver.Message;
 import Model.Obsrver.Observable;
@@ -24,27 +28,32 @@ public class Store implements Observable {
 	private boolean isExit = false;
 	private ArrayList<Client> clients;
 	private menuView theView;
-	// private static fileReadWrite file;
+	private FileIterator files;
 	private Singleton x;
 	private ArrayList<Client> clientsWhantsToGetMSG;
-	private  static Memento m;
+	private static Memento m;
+	private int checker = 1;
 
-	public Store(int Q,menuView theView) throws FileNotFoundException {
-		this.theView=theView;
+	public Store(int Q, menuView theView) throws IOException {
+		File file = new File("products.txt");
+		files = new FileIterator(file);
+		this.theView = theView;
 		x = Singleton.getInstance();
 		clients = new ArrayList<Client>();
 		clientsWhantsToGetMSG = new ArrayList<Client>();
-		// file = new fileReadWrite("file.bin");
 		switch (Q) {
 		case 1:
 			productMap = new TreeMap<String, Product>();
+			if (file.exists())
+				readFromFile();
 			break;
 		case 2:
 			productMap = new TreeMap<String, Product>(Collections.reverseOrder());
+			if (file.exists())
+				readFromFile();
 			break;
 		case 3:
 			productMap = new TreeMap<String, Product>(new Comparator<String>() {
-
 				public boolean containsKey(Object key) {
 					for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 						if (entry.getKey().equals(key)) {
@@ -60,6 +69,8 @@ public class Store implements Observable {
 					return -1;
 				}
 			});
+			if (file.exists())
+				readFromFile();
 			break;
 		}
 	}
@@ -76,25 +87,27 @@ public class Store implements Observable {
 		}
 		if (!isExit) {
 			productMap.put(pro.getBarcode(), pro);
+			addClinetsToClientsList(pro.getBuyer());
+			addObserver(pro.getBuyer());
 		}
 		mementoposabilty = true;
-		// file.writeProductToFile(pro);
 		isExit = false;
-		addClinetsToClientsList(pro.getBuyer());
-		addObserver(pro.getBuyer());
+
+		if (checker == 1)
+			files.saveTofile(productMap);
 	}
 
 	public void showAllClients() {
 		StringBuffer str = new StringBuffer();
-	//	View.showAllClients sal = new View.showAllClients();
 		for (int i = 0; i < clients.size(); i++) {
-			if(!clients.get(i).equals(" ")) {
-				str.append(clients.get(i)+"\n\n");
+			if (!clients.get(i).equals(" ")) {
+				str.append(clients.get(i) + "\n\n");
 			}
-		}theView.getSac().setLabel(str.toString());
+		}
+		theView.getSac().setLabel(str.toString());
 		theView.getSac().start();
 	}
-	
+
 	public void addClinetsToClientsList(Client client) {
 		clients.add(client);
 	}
@@ -103,28 +116,26 @@ public class Store implements Observable {
 		return clients;
 	}
 
-
 	public void ShowAllProducts() {
-		StringBuffer str =  new StringBuffer();
+		StringBuffer str = new StringBuffer();
 		int i = 1;
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
-			str.append(i+")\n");
+			str.append(i + ")\n");
 			i++;
-			str.append(entry.getValue()+"\n\n");
+			str.append(entry.getValue() + "\n\n");
 		}
 		theView.getSap().setLabel(str.toString());
 		theView.getSap().start();
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		StringBuffer str =  new StringBuffer();
+		StringBuffer str = new StringBuffer();
 		int i = 1;
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
-			str.append(i+")\n");
+			str.append(i + ")\n");
 			i++;
-			str.append(entry.getValue()+"\n\n");
+			str.append(entry.getValue() + "\n\n");
 		}
 		return str.toString();
 	}
@@ -138,12 +149,14 @@ public class Store implements Observable {
 		}
 		theView.showErrorMessage("there no such product");
 		return null;
-		}
+	}
+
 	public Product getProfitByBarcode(String barcode) {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			if (barcode.equals(entry.getKey())) {
-				//System.out.println(entry.getValue());
-				theView.showSuccsessMessage("for barcode "+entry.getKey()+"\nthe profit is: " +entry.getValue().getProfit());
+				// System.out.println(entry.getValue());
+				theView.showSuccsessMessage(
+						"for barcode " + entry.getKey() + "\nthe profit is: " + entry.getValue().getProfit());
 				return entry.getValue();
 			}
 		}
@@ -156,7 +169,7 @@ public class Store implements Observable {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			sum += entry.getValue().getProfit();
 		}
-		theView.showSuccsessMessage("the total profit is: " +sum);
+		theView.showSuccsessMessage("the total profit is: " + sum);
 		return sum;
 	}
 
@@ -165,11 +178,11 @@ public class Store implements Observable {
 		return new Memento(productMap, clients, clientsWhantsToGetMSG);
 	}
 
-	public void setMemento() {
+	public void setMemento() throws IOException {
 		if (mementoposabilty) {
 			TreeMap<String, Product> temp = m.getMap();
 			productMap.clear();
-			
+
 			for (Map.Entry<String, Product> entry : temp.entrySet()) {
 				productMap.put(entry.getKey(), entry.getValue());
 			}
@@ -185,13 +198,29 @@ public class Store implements Observable {
 				clientsWhantsToGetMSG.add(tempClinetsMSG.get(i));
 			}
 			mementoposabilty = false;
+			files.saveTofile(productMap);
 			theView.showSuccsessMessage("success undo");
 		} else {
 			theView.showErrorMessage("you cant undo now");
 		}
 	}
 
-	public void removeProduct(String barcode) {
+	private void readFromFile() throws IOException {
+		Iterator<Entry<String, Product>> it = files.iterator();
+		if (!it.hasNext()) {
+			checker = 1;
+			return;
+		}
+
+		while (it.hasNext()) {
+			checker = 0;
+			Entry<String, Product> tmp = it.next();
+			addToStore(tmp.getValue());
+		}
+		checker = 1;
+	}
+
+	public void removeProduct(String barcode) throws IOException {
 		String clientName = "";
 		int check =0;
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
@@ -211,16 +240,29 @@ public class Store implements Observable {
 				clientsWhantsToGetMSG.remove(i);
 			}
 		}
+		Iterator<Entry<String, Product>> it = files.iterator();
+		while (it.hasNext()) {
+			Entry<String, Product> tmp = it.next();
+			if (tmp.getKey().equals(barcode)) {
+				it.remove();
+				readFromFile();
 		mementoposabilty = false;
 		if(check==1) {
 			theView.showSuccsessMessage("the product remove");
 		}else theView.showErrorMessage("there is not such product");
+			}
+		}
 	}
 
 	public void removeAllProduct() {
 		clients.clear();
 		clientsWhantsToGetMSG.clear();
 		productMap.clear();
+		Iterator<Entry<String, Product>> it = files.iterator();
+		while (it.hasNext()) {
+			it.next();
+			it.remove();
+		}
 		mementoposabilty = false;
 	}
 
@@ -242,29 +284,29 @@ public class Store implements Observable {
 
 	@Override
 	public synchronized void notifyObservers(String msg) {
-		StringBuffer str = new StringBuffer(""); 
+		StringBuffer str = new StringBuffer("");
 		theView.getSms().setLabel(str.toString());
 		theView.getSms().start();
 
-		Thread thread = new Thread(()->{
-		try {
-			
-			for (Client C : clientsWhantsToGetMSG) {
-				
-				Platform.runLater(() ->{
-				str.append(x.receiveMSG(C, x.s, new Message(msg)));
-				str.append("\n");
-				theView.getSms().setLabel(str.toString());
-				theView.getSms().start();
-				});
-				
-				Thread.sleep(2000);
+		Thread thread = new Thread(() -> {
+			try {
+
+				for (Client C : clientsWhantsToGetMSG) {
+
+					Platform.runLater(() -> {
+						str.append(x.receiveMSG(C, x.s, new Message(msg)));
+						str.append("\n");
+						theView.getSms().setLabel(str.toString());
+						theView.getSms().start();
+					});
+
+					Thread.sleep(2000);
 				}
-			}catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				System.out.println("store");
-			} 
+			}
 		});
 		thread.start();
 	}
-	
+
 }

@@ -4,6 +4,9 @@
 
 package Model;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 import View.menuView;
 
 public class Product {
@@ -47,13 +50,28 @@ public class Product {
 	@Override
 	public String toString() {
 		StringBuffer str =new StringBuffer();
-		str.append( "barcode:\t " + barcode + "\nProductName:\t " + ProductName + "\nCostPrice:\t " + CostPrice
-				+ "\nSellingPrice:\t " + SellingPrice+"\n");
+		str.append( "barcode:\t " + barcode + "\nProductName:\t " + ProductName);
+		if(CostPrice!=-1) {
+			str.append("\nCostPrice:\t " + CostPrice);
+		}else 
+			str.append("\nCostPrice:\t ");
+		if(SellingPrice!=-1) {
+			str.append("\nSellingPrice:\t " + SellingPrice+"\n");
+		}else
+			str.append("\nSellingPrice:\t ");
+		
 		return str.toString();
 	}
 
 	public int getProfit() {
 		return (SellingPrice-CostPrice);
+	}
+	public void saveProductToFile(RandomAccessFile raf) throws IOException {
+		raf.writeUTF(barcode);
+		raf.writeUTF(ProductName);
+		raf.writeInt(CostPrice);
+		raf.writeInt(SellingPrice);
+		buyer.saveCustomerToFile(raf);
 	}
 	
 	

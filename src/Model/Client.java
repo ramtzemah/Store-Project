@@ -1,5 +1,8 @@
 package Model;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 import com.sun.javafx.webkit.ThemeClientImpl;
 
 import Model.Obsrver.Message;
@@ -71,6 +74,12 @@ public class Client implements Sender, Receiver {
 
 	public boolean isWantsUpdate() {
 		return wantsUpdate;
+	}
+
+	public void saveCustomerToFile(RandomAccessFile raf) throws IOException {
+		raf.writeUTF(ClientName);
+		raf.writeUTF(phoneNumber);
+		raf.writeBoolean(wantsUpdate);
 	}
 	
 	

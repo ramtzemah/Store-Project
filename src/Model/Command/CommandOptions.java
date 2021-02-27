@@ -4,7 +4,7 @@ import Model.Store;
 
 public class CommandOptions {
 
-	private Command addProductToStoreCommand;
+	private addProductToStoreCommand apts;
 	private Command AllProductsProfitCommand;
 	private ChoosenProductProfitCommand ccp;
 	private Command MementoCommand;
@@ -15,7 +15,7 @@ public class CommandOptions {
 	private Command showAllProductCommand;
 	private showChoosenProductCommand scp;
 	private Store store;
-	public CommandOptions(Command addProductToStoreCommand,
+	public CommandOptions(addProductToStoreCommand apts,
 	Command AllProductsProfitCommand,
 	ChoosenProductProfitCommand ccp,
 	Command MementoCommand,
@@ -27,7 +27,7 @@ public class CommandOptions {
 	showChoosenProductCommand scp,
 //	Command showChoosenProductCommand,
 	Store store) {
-		this.addProductToStoreCommand=addProductToStoreCommand;
+		this.apts=apts;
 		this.AllProductsProfitCommand =AllProductsProfitCommand;
 		this.ccp=ccp;
 		this.MementoCommand= MementoCommand;
@@ -52,7 +52,7 @@ public class CommandOptions {
 	}
 
 	public void AddProductToStoreCommand() {
-		addProductToStoreCommand.execute();
+		apts.execute();
 	}
 
 	public void AllProductsProfitCommand() {
@@ -91,8 +91,8 @@ public class CommandOptions {
 		scp.execute();
 	}
 
-	public Command getAddProductToStoreCommand() {
-		return addProductToStoreCommand;
+	public addProductToStoreCommand getAddProductToStoreCommand() {
+		return apts;
 	}
 
 	public Command getAllProductsProfitCommand() {

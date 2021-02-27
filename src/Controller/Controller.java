@@ -35,7 +35,7 @@ public class Controller {
 			store.addToStore(pro3);
 			store.addToStore(pro1);
 			store.addToStore(pro2);
-			Command addProductToStoreCommand = new addProductToStoreCommand(store);
+			addProductToStoreCommand apts = new addProductToStoreCommand(store);
 			Command AllProductsProfitCommand = new AllProductsProfitCommand(store);
 			ChoosenProductProfitCommand ccp= new ChoosenProductProfitCommand(store);
 			Command MementoCommand = new MementoCommand(store);
@@ -46,8 +46,8 @@ public class Controller {
 			Command showAllProductCommand=new showAllProductCommand(store);
 			showChoosenProductCommand showChoosenProductCommand = new showChoosenProductCommand(store);
 
-			CommandOptions CommOp = new CommandOptions(addProductToStoreCommand, AllProductsProfitCommand, ccp, MementoCommand, RemoveAllProductCommand, rcpc, sMSG, sak, showAllProductCommand, showChoosenProductCommand,store);
-			addProductController apc = new addProductController(primaryStage,CommOp);
+			CommandOptions CommOp = new CommandOptions(apts, AllProductsProfitCommand, ccp, MementoCommand, RemoveAllProductCommand, rcpc, sMSG, sak, showAllProductCommand, showChoosenProductCommand,store);
+			addProductController apc = new addProductController(CommOp);
 			AllProductsProfitController app = new AllProductsProfitController(primaryStage,CommOp);
 			ChoosenProductProfitController cpp = new ChoosenProductProfitController(primaryStage,CommOp);
 			MementoController mm = new MementoController(primaryStage,CommOp);

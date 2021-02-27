@@ -12,7 +12,9 @@ public class addProductToStoreCommand implements Command {
 	private String ProductName;
 	private int CostPrice;
 	private int SellingPrice; 
-	private Client buyer;
+	private String clientName;
+	private String clientPhoneNumber;
+	private boolean wantsGetMSG;
 	
 	public addProductToStoreCommand(Store store){
 		this.store = store;
@@ -21,10 +23,10 @@ public class addProductToStoreCommand implements Command {
 	@Override
 	public void execute() {
 		try {
-			//Product pro = new Product(ProductName, barcode, CostPrice, SellingPrice,buyer.getClientName(),buyer.getPhoneNumber(),buyer.isWantsUpdate());
-		//	store.addToStore(pro);
+			Product pro = new Product(barcode, ProductName, CostPrice, SellingPrice,clientName,clientPhoneNumber,wantsGetMSG);
+			store.addToStore(pro);
 		} catch (Exception e) {
-			System.out.println("addProductToStoreCommand");
+			//System.out.println("addProductToStoreCommand");
 		}		
 	}
 
@@ -48,12 +50,17 @@ public class addProductToStoreCommand implements Command {
 		SellingPrice = sellingPrice;
 	}
 
-	public void setBuyer(Client buyer) {
-		this.buyer = buyer;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
-	
-	
-	
+	public void setClientPhoneNumber(String clientPhoneNumber) {
+		this.clientPhoneNumber = clientPhoneNumber;
+	}
 
+	public void setWantsGetMSG(boolean wantsGetMSG) {
+		this.wantsGetMSG = wantsGetMSG;
+	}
+	
+	
 }

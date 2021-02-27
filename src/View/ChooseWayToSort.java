@@ -17,8 +17,11 @@ public class ChooseWayToSort extends Application{
 	private ChoiceBox<String> cb;
 	private Button startAdding;
 	private Scene scene;
+	private Stage PrimaryStage;
+	
 	@Override
-	public void start(Stage PrimaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception {
+		this.PrimaryStage = primaryStage;
 		GridPane root = new GridPane();
 		scene = new Scene(root);
         PrimaryStage.setScene(scene);
@@ -51,33 +54,47 @@ public class ChooseWayToSort extends Application{
 			    if(count==1) {
 			    	root.addRow(10,startAdding);
 			    }
+			    
 	});
 		root.setAlignment(Pos.CENTER);
 		   
         // Add the scene to the Stage
 	    PrimaryStage.setScene(scene);
         // Display the Stage
+	    
 	    PrimaryStage.show(); 
+
 	}
+	
 	public int getChoose() {
+		System.out.println("cascas");
 		if(cb.getValue().equalsIgnoreCase("add products alphabetic")) {
-			return 0;
-		}
-		else if(cb.getValue().equalsIgnoreCase("add products in oposite order")) {
 			return 1;
 		}
-		else if(cb.getValue().equalsIgnoreCase("add by adding order")) {
+		else if(cb.getValue().equalsIgnoreCase("add products in oposite order")) {
 			return 2;
+		}
+		else if(cb.getValue().equalsIgnoreCase("add by adding order")) {
+			return 3;
 		}
 		else return -1;
 	}
+	
 	public void addButtonEvent(EventHandler<ActionEvent> btnEvent) {
 		startAdding.setOnAction(btnEvent);
 		
 	}
 
 	public void close() {
-		this.scene.getWindow().hide();
+		this.PrimaryStage.close();
 	}
+	
+	public Button getStartAdding() {
+		System.out.println("csaca");
+		return startAdding;
+	}
+
+	
+	
 
 }

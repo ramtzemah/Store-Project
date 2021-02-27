@@ -28,7 +28,6 @@ public class menuView{
 	private showAllClients sac;
 	private sendMSGShow sms;
 
-
 	public menuView(Stage primaryStage) {
 		this.PrimaryStage = primaryStage;	
 		sap = new showAllProducts();
@@ -166,6 +165,7 @@ public class menuView{
 		alert.setContentText(errorMessage);
 		alert.show();
 	}
+	
 	public static void showSuccsessMessage(String succsessMessage) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setContentText(succsessMessage);
@@ -183,5 +183,11 @@ public class menuView{
 	public sendMSGShow getSms() {
 		return sms;
 	}
+
+	public Stage getPrimaryStage() {
+		return PrimaryStage;
+	}
+	
+	
 	
 }
