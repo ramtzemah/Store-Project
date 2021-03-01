@@ -57,7 +57,9 @@ public class Client implements Sender, Receiver {
 	@Override
 	public synchronized String sendMSG() {
 		StringBuffer str =  new StringBuffer();
-		str.append("\nmy name is "+ ClientName);
+		if(!ClientName.equals(" ")) {
+			str.append("\nmy name is "+ ClientName);
+		}
 		str.append("\nmy phone number is "+ phoneNumber);
 		str.append("\ni get the message :)\n\n");
 		

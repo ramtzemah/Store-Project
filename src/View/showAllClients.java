@@ -33,8 +33,8 @@ public class showAllClients{
         ThirdWindow.setScene(ThirdScene);
         
         // Set position of second window, related to primary window.
-        ThirdWindow.setX(primaryStage.getX() + 200);
-        ThirdWindow.setY(primaryStage.getY() + 100);
+        ThirdWindow.setX(500);
+        ThirdWindow.setY(220);
         ThirdWindow.show();
 	}
 

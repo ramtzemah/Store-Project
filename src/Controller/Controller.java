@@ -25,10 +25,10 @@ import javafx.stage.Stage;
 public class Controller {
 
 	private menuView menuview;
-		public Controller(Stage primaryStage, menuView menuview) throws Exception {
+		public Controller(Stage primaryStage, menuView menuview, int choise) throws Exception {
 			this.menuview=menuview;	
 			menuview.start();
-			Store store =new Store(1,menuview);
+			Store store =new Store(choise,menuview);
 			Product pro1 = new Product("def","milk" ,3,5,"ram", "0501111111", true);
 			Product pro2 = new Product( "abc","apple",7,9,"omer", "05022222222", false);
 			Product pro3 = new Product( "ghi","orange",1,6,"mohamad", "0503333333", true);

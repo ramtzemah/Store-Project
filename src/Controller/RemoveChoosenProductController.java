@@ -22,9 +22,12 @@ public class RemoveChoosenProductController {
 			rpbm.getShow().setOnAction(new EventHandler<ActionEvent>() {
 		    	
 		        @Override public void handle(ActionEvent e) {
-
+		        	ValidsTests vt = new ValidsTests();
 		    		if(rpbm.getBarcode().getText().isEmpty()) {
 		    		menuView.showErrorMessage("you have to add a barcode");
+		    		}
+		    		else if(!vt.checkBarcode(rpbm.getBarcode().getText())) {
+		    			vt.showErrorMessage("wrong input on barcode");
 		    		}
 				else {
 					String barcode = rpbm.getBarcode().getText();

@@ -14,11 +14,14 @@ import javafx.stage.Stage;
 
 public class ChooseWayToSort extends Application{
 	private int count = 0;
-	private ChoiceBox<String> cb;
+	
 	private Button startAdding;
 	private Scene scene;
 	private Stage PrimaryStage;
-	
+	private int choise ;
+    final ChoiceBox<String> cb = new ChoiceBox<String>(FXCollections.observableArrayList(
+		    "add products alphabetic", "add products in oposite order", "add by adding order")
+		);
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.PrimaryStage = primaryStage;
@@ -36,9 +39,7 @@ public class ChooseWayToSort extends Application{
 				+ "-fx-font: 25px Tahoma;"
 				+ "-fx-underline: true;");
 		// Create the checkBok
-		cb = new ChoiceBox<String>(FXCollections.observableArrayList(
-			    "add products alphabetic", "add products in oposite order", "add by adding order")
-			);
+        cb.setValue("add products alphabetic");
 		//root.setPadding(new Insets(10, 10, 10, 10)); 
 	      
 	      //Setting the vertical and horizontal gaps between the columns 
@@ -46,16 +47,14 @@ public class ChooseWayToSort extends Application{
 		root.setHgap(1); 
 		root.addRow(0, PrimaryTitle);
 		root.addRow(10, cb);
-		cb.setOnAction(event -> {
-			 startAdding = new Button("START");
-			    startAdding.setStyle("-fx-text-fill: #0000ff");
-			    
-			    count++;
-			    if(count==1) {
-			    	root.addRow(10,startAdding);
-			    }
-			    
-	});
+		 startAdding = new Button("START");
+		 //
+		    startAdding.setStyle("-fx-text-fill: #0000ff");
+		    count++;
+		    if(count==1) {
+		    	root.addRow(10,startAdding);
+		    }
+		    
 		root.setAlignment(Pos.CENTER);
 		   
         // Add the scene to the Stage
@@ -67,7 +66,6 @@ public class ChooseWayToSort extends Application{
 	}
 	
 	public int getChoose() {
-		System.out.println("cascas");
 		if(cb.getValue().equalsIgnoreCase("add products alphabetic")) {
 			return 1;
 		}
@@ -90,9 +88,13 @@ public class ChooseWayToSort extends Application{
 	}
 	
 	public Button getStartAdding() {
-		System.out.println("csaca");
 		return startAdding;
 	}
+
+	public int getChoise() {
+		return choise;
+	}
+
 
 	
 	

@@ -22,9 +22,15 @@ public class ChoosenProductProfitController {
 	 		ssp.Show.setOnAction(new EventHandler<ActionEvent>() {
 	 			
     	        @Override public void handle(ActionEvent e) {
-    	        	commOp.getChoosenProductProfitCommand().setBarcode(ssp.getBarcode());
-    	        	ssp.close();
-    	        	commOp.getChoosenProductProfitCommand().execute();
+    	        	ValidsTests vt = new ValidsTests();
+    	        	if(!vt.checkBarcode(ssp.getBarcode())) {
+		    			vt.showErrorMessage("wrong input on barcode");
+		    		}
+    	        	else {
+        	        	commOp.getChoosenProductProfitCommand().setBarcode(ssp.getBarcode());
+        	        	ssp.close();
+        	        	commOp.getChoosenProductProfitCommand().execute();
+    	        	}
     	        	}
 	 			});
 		}

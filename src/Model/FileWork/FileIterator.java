@@ -106,9 +106,4 @@ public class FileIterator implements Iterable<Entry<String, Product>> {
 		p.saveProductToFile(raf);
 		}
 
-
-	public void deleteSortType() {
-		fileName.delete();
-	}
-
 }

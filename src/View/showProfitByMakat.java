@@ -38,8 +38,8 @@ private Stage primaryStage;
         primaryStage.setScene(ThirdScene);
 
         // Set position of second window, related to primary window.
-        primaryStage.setX(primaryStage.getX() + 200);
-        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.setX(380);
+        primaryStage.setY(220);
         primaryStage.show();
     	
 	}

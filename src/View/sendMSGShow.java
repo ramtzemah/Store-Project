@@ -10,8 +10,8 @@ public class sendMSGShow {
 private Label label;
 private Stage primaryStage;
 	
-	public sendMSGShow(Stage primaryStage) {
-		this.primaryStage=primaryStage;
+	public sendMSGShow() {
+		primaryStage = new Stage();
 	}
 
 	public void start() {
@@ -34,8 +34,8 @@ private Stage primaryStage;
         primaryStage.setScene(ThirdScene);
         
         // Set position of second window, related to primary window.
-        primaryStage.setX(primaryStage.getX() + 200);
-        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.setX(500);
+        primaryStage.setY(200);
         primaryStage.show();
     	
 		

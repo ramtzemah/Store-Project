@@ -18,7 +18,6 @@ private Stage primaryStage;
 
 	public void start(){
 		primaryStage = new Stage();
-		this.primaryStage=primaryStage;
 		MSG = new TextField();
     	Label MSGLbl = new Label("Enter Message:");
     	MSGLbl.setLabelFor(MSG);
@@ -37,8 +36,8 @@ private Stage primaryStage;
         primaryStage.setScene(ThirdScene);
 
         // Set position of second window, related to primary window.
-        primaryStage.setX(primaryStage.getX() + 200);
-        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.setX(500);
+        primaryStage.setY(200);
         primaryStage.show();
 	}
 

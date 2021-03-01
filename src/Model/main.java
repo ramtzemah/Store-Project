@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.security.AllPermission;
 
 import Controller.Controller;
+import Controller.SortViewController;
 import Model.Command.AllProductsProfitCommand;
 import Model.Command.ChoosenProductProfitCommand;
 import Model.Command.Command;
@@ -41,7 +42,7 @@ public class main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		menuView view = new menuView(primaryStage);
-		Controller controller = new Controller(primaryStage,view);		
+		SortViewController svc = new SortViewController(primaryStage);
+	
 	}	
 }

@@ -5,11 +5,15 @@ import java.util.concurrent.Semaphore;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class menuView{
@@ -27,69 +31,81 @@ public class menuView{
 	private showAllProducts sap;
 	private showAllClients sac;
 	private sendMSGShow sms;
-
+	private ShowProductView spw;
+	
 	public menuView(Stage primaryStage) {
 		this.PrimaryStage = primaryStage;	
 		sap = new showAllProducts();
 		sac = new showAllClients();
-		sms = new sendMSGShow(primaryStage);
+		sms = new sendMSGShow();
+		spw = new ShowProductView();
 	}
 	
 	public void start() throws Exception {
-		 GridPane seconderyRoot = new GridPane();
-         seconderyRoot.setVgap(3); 
-         seconderyRoot.setHgap(3); 
-         Label SeconderyTitle = new Label("MENU:");
-         SeconderyTitle.setStyle("-fx-font-size: 22;"
- 				+ "-fx-font-weight: bold;"
- 				+ "-fx-background-color: rgba(0, 60, 136, 0.5);"
- 				+ "-fx-border-color: rgba(0, 60, 136, 0.8);"
- 				+ "-fx-font: 22px Tahoma;"
- 				+ "-fx-underline: true;");
+		GridPane seconderyRoot = new GridPane();
+		seconderyRoot.setVgap(3); 
+		seconderyRoot.setHgap(3); 
+		Label SeconderyTitle = new Label("Store Menu :");
+		SeconderyTitle.setStyle("-fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);"
+				+ "-fx-font-size: 25;");
+		
+		//create buttons
+		DropShadow ds = new DropShadow();
+		ds.setRadius(5.0);
+		ds.setOffsetX(3.0);
+		ds.setOffsetY(3.0); 
+		SeconderyTitle.setEffect(ds);
+		addProd = new Button("add Product");
 
-         //create buttons
-        addProd = new Button("add Product");
-        
- 		addProd.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		showProds = new Button("show specipic Product");
- 		showProds.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		showAllProd = new Button("show All Products");
- 		showAllProd.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");	
- 		
- 		RemoveLastProd = new Button("Remove Last Product");
- 		RemoveLastProd.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 				
- 		RemoveByMAKAT = new Button("Remove Product");
- 		RemoveByMAKAT.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 			
- 		RemoveAllProds = new Button("Remove All Products");
- 		RemoveAllProds.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		showSpecProfit = new Button("show product Profit");
- 		showSpecProfit.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		showProfit = new Button("show total Profit");
- 		showProfit.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 			
- 		sendMSG = new Button("send MSG to clients");
- 		sendMSG.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		showAllClient = new Button("show all clients");
- 		showAllClient.setStyle("-fx-text-fill: black;"
- 				+ "-fx-border-color:black;");
- 		
- 		seconderyRoot.add(SeconderyTitle,4,0);
+		addProd.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		showProds = new Button("show specipic Product");
+		showProds.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		showAllProd = new Button("show All Products");
+		showAllProd.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");	
+
+		RemoveLastProd = new Button("Remove Last Product (undo)");
+		RemoveLastProd.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		RemoveByMAKAT = new Button("Remove Product");
+		RemoveByMAKAT.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		RemoveAllProds = new Button("Remove All Products");
+		RemoveAllProds.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		showSpecProfit = new Button("show product Profit");
+		showSpecProfit.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		showProfit = new Button("show total Profit");
+		showProfit.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		sendMSG = new Button("send MSG to clients");
+		sendMSG.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+
+		showAllClient = new Button("show all clients");
+		showAllClient.setStyle("-fx-text-fill: black;"
+				+ "-fx-border-color:black;"
+				+ "-fx-pref-width: 200px;");
+ 		VBox hb = new VBox();
  		seconderyRoot.add(addProd, 0, 2);
  		seconderyRoot.add(showProds, 6, 2);
  		seconderyRoot.add(showAllProd, 0, 4);
@@ -100,10 +116,13 @@ public class menuView{
  		seconderyRoot.add(showProfit, 6, 8);
  		seconderyRoot.add(sendMSG, 0, 10);
  		seconderyRoot.add(showAllClient, 6, 10);
+ 		hb.getChildren().addAll(SeconderyTitle,seconderyRoot);
+ 		hb.setAlignment(Pos.TOP_CENTER);
+ 		seconderyRoot.setAlignment(Pos.CENTER);
  		//seconderyRoot.add(Undo, 4, 41);
  		
  		
-         Scene secondScene = new Scene(seconderyRoot, 450, 300);
+         Scene secondScene = new Scene(hb, 450, 230);
 
          // New window (Stage)
          Stage newWindow = new Stage();
@@ -111,8 +130,8 @@ public class menuView{
          newWindow.setScene(secondScene);
 
          // Set position of second window, related to primary window.
-         newWindow.setX(PrimaryStage.getX() + 200);
-         newWindow.setY(PrimaryStage.getY() + 100);
+         newWindow.setX(450);
+         newWindow.setY(200);
          //PrimaryStage.getScene().getWindow().hide();
          newWindow.show();
      }
@@ -186,6 +205,10 @@ public class menuView{
 
 	public Stage getPrimaryStage() {
 		return PrimaryStage;
+	}
+
+	public ShowProductView getSpw() {
+		return spw;
 	}
 	
 	

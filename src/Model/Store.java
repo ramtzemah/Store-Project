@@ -143,7 +143,9 @@ public class Store implements Observable {
 	public Product getProduct(String barcode) {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			if (barcode.equals(entry.getKey())) {
-				theView.showSuccsessMessage(entry.getValue().toString());
+				theView.getSpw().setHeadAllProd("the chosen product is:");
+				theView.getSpw().setLabel(entry.getValue().toString());
+				theView.getSpw().start();
 				return entry.getValue();
 			}
 		}
@@ -155,8 +157,10 @@ public class Store implements Observable {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			if (barcode.equals(entry.getKey())) {
 				// System.out.println(entry.getValue());
-				theView.showSuccsessMessage(
-						"for barcode " + entry.getKey() + "\nthe profit is: " + entry.getValue().getProfit());
+				theView.getSpw().setHeadAllProd("for barcode " + entry.getKey());
+				theView.getSpw().setLabel(
+						"\nthe profit is: " + entry.getValue().getProfit());
+				theView.getSpw().start();
 				return entry.getValue();
 			}
 		}
@@ -169,7 +173,9 @@ public class Store implements Observable {
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			sum += entry.getValue().getProfit();
 		}
-		theView.showSuccsessMessage("the total profit is: " + sum);
+		theView.getSpw().setHeadAllProd("the total profit is:");
+		theView.getSpw().setLabel(""+sum);
+		theView.getSpw().start();
 		return sum;
 	}
 
@@ -206,15 +212,15 @@ public class Store implements Observable {
 	}
 
 	private void readFromFile() throws IOException {
-		Iterator<Entry<String, Product>> it = files.iterator();
-		if (!it.hasNext()) {
+		Iterator<Entry<String, Product>> fileitrator = files.iterator();
+		if (!fileitrator.hasNext()) {
 			checker = 1;
 			return;
 		}
 
-		while (it.hasNext()) {
+		while (fileitrator.hasNext()) {
 			checker = 0;
-			Entry<String, Product> tmp = it.next();
+			Entry<String, Product> tmp = fileitrator.next();
 			addToStore(tmp.getValue());
 		}
 		checker = 1;
@@ -240,11 +246,11 @@ public class Store implements Observable {
 				clientsWhantsToGetMSG.remove(i);
 			}
 		}
-		Iterator<Entry<String, Product>> it = files.iterator();
-		while (it.hasNext()) {
-			Entry<String, Product> tmp = it.next();
+		Iterator<Entry<String, Product>> itrator = files.iterator();
+		while (itrator.hasNext()) {
+			Entry<String, Product> tmp = itrator.next();
 			if (tmp.getKey().equals(barcode)) {
-				it.remove();
+				itrator.remove();
 				readFromFile();
 		mementoposabilty = false;
 		if(check==1) {

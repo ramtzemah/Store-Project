@@ -95,8 +95,8 @@ public class addProductView {
 		primaryStage.setScene(ThirdScene);
 
 		// Set position of second window, related to primary window.
-		primaryStage.setX(primaryStage.getX() + 200);
-		primaryStage.setY(primaryStage.getY() + 100);
+		primaryStage.setX(480);
+		primaryStage.setY(150);
 		primaryStage.show();
 	}
 

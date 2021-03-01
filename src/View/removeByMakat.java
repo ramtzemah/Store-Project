@@ -35,8 +35,8 @@ public class removeByMakat{
         primaryStage.setScene(ThirdScene);
 
         // Set position of second window, related to primary window.
-        primaryStage.setX(primaryStage.getX() + 200);
-        primaryStage.setY(primaryStage.getY() + 100);
+        primaryStage.setX(485);
+        primaryStage.setY(230);
         primaryStage.show();
     	
 	}
